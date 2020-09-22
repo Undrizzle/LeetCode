@@ -171,4 +171,54 @@ class Solution {
         }
         return digits
     }
+    
+    /*
+     有效的数独
+     [
+       ["5","3",".",".","7",".",".",".","."],
+       ["6",".",".","1","9","5",".",".","."],
+       [".","9","8",".",".",".",".","6","."],
+       ["8",".",".",".","6",".",".",".","3"],
+       ["4",".",".","8",".","3",".",".","1"],   -> true
+       ["7",".",".",".","2",".",".",".","6"],
+       [".","6",".",".",".",".","2","8","."],
+       [".",".",".","4","1","9",".",".","5"],
+       [".",".",".",".","8",".",".","7","9"]
+     ]
+     */
+    func isValidSudoku(_ board: [[Character]]) -> Bool {
+        var row: [[Int : Int]] = Array(repeating: [:], count: 9)
+        var column: [[Int : Int]] = Array(repeating: [:], count: 9)
+        var box: [[Int : Int]] = Array(repeating: [:], count: 9)
+    
+        for i in 0..<9 {
+            for j in 0..<9 {
+                let ch = board[i][j]
+                if ch != "." {
+                    let n = Int(String(ch))!
+                    let box_index = (i / 3) * 3 + j / 3
+                
+                    if let _ = row[i][n] {
+                        return false
+                    } else {
+                        row[i][n] = 1
+                    }
+                
+                    if let _ = column[j][n] {
+                        return false
+                    } else {
+                        column[j][n] = 1
+                    }
+                
+                    if let _ = box[box_index][n] {
+                        return false
+                    } else {
+                        box[box_index][n] = 1
+                    }
+                }
+            }
+        }
+
+        return true
+    }
 }
