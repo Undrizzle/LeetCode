@@ -221,4 +221,21 @@ class Solution {
 
         return true
     }
+    
+    /*
+     旋转图像
+     [                  [
+        [1,2,3],            [7,4,1],
+        [4,5,6],   ->       [8,5,2],
+        [7,8,9]             [9,6,3]
+     ]                  ]
+     */
+    func rotate(_ matrix: inout [[Int]]) {
+        let mat = matrix
+        for i in 0..<matrix.count {
+            for j in 0..<matrix.count {
+                matrix[i][j] = mat[matrix.count-j-1][i]
+            }
+        }
+    }
 }
